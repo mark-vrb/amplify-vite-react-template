@@ -13,9 +13,7 @@ function App() {
     client.models.Todo.observeQuery().subscribe({
       next: (data) => setTodos([...data.items]),
     });
-  }, []);
 
-  useEffect(() => {
     client.models.EnabledFeatures.observeQuery().subscribe({
       next: (data) => setFeatures([...data.items]),
     })
