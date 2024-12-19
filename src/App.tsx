@@ -20,7 +20,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const featuresDef = features[0]?.features;
+    const featuresDef = JSON.parse(features[0]?.features as string);
     if (Array.isArray(featuresDef)) {
       setFeaturesList([...featuresDef]);
     }
