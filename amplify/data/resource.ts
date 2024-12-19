@@ -1,12 +1,6 @@
 import { type ClientSchema, a, defineData } from "@aws-amplify/backend";
 import {sayHello} from "../functions/say-hello/resource";
 
-/*== STEP 1 ===============================================================
-The section below creates a Todo database table with a "content" field. Try
-adding a new "isDone" field as a boolean. The authorization rule below
-specifies that any user authenticated via an API key can "create", "read",
-"update", and "delete" any "Todo" records.
-=========================================================================*/
 const schema = a.schema({
   sayHello: a
     .query()
@@ -19,6 +13,13 @@ const schema = a.schema({
   Todo: a
     .model({
       content: a.string(),
+    }),
+
+  EnabledFeatures:
+    a.model({
+      features: a.json(),
+      accounts: a.json(),
+      effective: a.datetime()
     })
     // .authorization((allow) => [allow.publicApiKey()]),
 }).authorization(allow => [
