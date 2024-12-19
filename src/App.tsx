@@ -20,7 +20,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const featuresDef = JSON.parse(features[0]?.features as string);
+    const featuresDef = JSON.parse(features[0]?.features as string || '[]');
     if (Array.isArray(featuresDef)) {
       setFeaturesList([...featuresDef]);
     }
@@ -38,6 +38,10 @@ function App() {
     client.models.Todo.delete({id})
   }
 
+  // function createSampleFeature() {
+  //   client.models.EnabledFeatures.create({features: '["asdfa", "asdfadff"]'});
+  // }
+
   return (
     <main>
       <h1>My todos</h1>
@@ -51,16 +55,17 @@ function App() {
           </li>
         ))}
       </ul>
-      <div>
-        🥳 App successfully hosted. Try creating a new todo.
-        <br/>
-        <a href="https://docs.amplify.aws/react/start/quickstart/#make-frontend-updates">
-          Review next step of this tutorial.
-        </a>
-      </div>
+      {/*<div>*/}
+      {/*  🥳 App successfully hosted. Try creating a new todo.*/}
+      {/*  <br/>*/}
+      {/*  <a href="https://docs.amplify.aws/react/start/quickstart/#make-frontend-updates">*/}
+      {/*    Review next step of this tutorial.*/}
+      {/*  </a>*/}
+      {/*</div>*/}
 
       <div>
         <h3>My features</h3>
+        {/*<button onClick={createSampleFeature}>Create default features</button>*/}
         {featuresList.map((feature) => (
           <div>{feature}</div>
         ))}
