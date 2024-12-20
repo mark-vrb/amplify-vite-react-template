@@ -30,7 +30,7 @@ function App() {
     const featuresDef = JSON.parse(features[0]?.features as string || '[]');
     if (Array.isArray(featuresDef)) {
       setFeaturesList([...featuresDef]);
-      console.log("features update received:", featuresList);
+      console.log("features update received:", featuresDef);
     }
   }, [features]);
 
