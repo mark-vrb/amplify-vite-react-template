@@ -14,7 +14,7 @@ function App() {
   const [liveFeatures, setLiveFeatures] = useState<string>();
 
   const [featuresList, setFeaturesList] = useState<string>();
-  const [featuresInitialized, setFeaturesInitialized] = useState<boolean>(false);
+  const [hackwireLogo, setHackwireLogo] = useState<boolean>(false);
 
   const dialog = document.querySelector("dialog");
 
@@ -46,19 +46,19 @@ function App() {
     const live = JSON.parse(liveFeatures) as string[];
 
     const set = new Set([...buildTime, ...live]);
+    if (set.has('hackwireLogo')) {
+      setHackwireLogo(true);
+    } else {
+      setHackwireLogo(false);
+    }
     setFeaturesList(JSON.stringify(Array.from(set)));
   }, [buildTimeFeatures, liveFeatures]);
 
   useEffect(() => {
     if (!featuresList) return;
-    if (featuresInitialized) {
-      console.log("features update received:", featuresList);
-      dialog?.showModal();
-    } else {
-      console.log("features initialized:", featuresList);
-    }
-    setFeaturesInitialized(true);
-  }, [dialog, featuresList, featuresInitialized]);
+    console.log("features update received:", featuresList);
+    dialog?.showModal();
+  }, [dialog, featuresList]);
 
   function createTodo() {
     client.models.Todo.create({content: window.prompt("Todo content")});
@@ -81,7 +81,10 @@ function App() {
     <main>
       <div className="header">
         <img src="/fwIcon.svg" width="50" height="50" alt={'fwLogo'}/>
-        <h1>fieldwire 2.0</h1>
+        { hackwireLogo ?
+          <h1><s>Fieldwire</s> Hackwire</h1> :
+          <h1>Fieldwire</h1>
+        }
       </div>
       <h2>My todos</h2>
       <button onClick={createTodo}>+ new</button>
