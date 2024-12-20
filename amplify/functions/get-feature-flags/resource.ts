@@ -1,6 +1,6 @@
 import { defineFunction } from '@aws-amplify/backend';
 
-export const sayHello = defineFunction({
+export const getFeatureFlags = defineFunction({
   environment: {
     ENABLE_FEATURES: process.env.ENABLE_FEATURES || ''
   }

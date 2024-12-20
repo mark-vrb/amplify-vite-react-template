@@ -1,14 +1,11 @@
 import { type ClientSchema, a, defineData } from "@aws-amplify/backend";
-import {sayHello} from "../functions/say-hello/resource";
+import {getFeatureFlags} from "../functions/get-feature-flags/resource";
 
 const schema = a.schema({
-  sayHello: a
+  getFeatureFlags: a
     .query()
-    .arguments({
-      name: a.string(),
-    })
     .returns(a.string())
-    .handler(a.handler.function(sayHello)),
+    .handler(a.handler.function(getFeatureFlags)),
 
   Todo: a
     .model({

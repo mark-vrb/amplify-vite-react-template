@@ -2,6 +2,8 @@ import {useEffect, useState} from "react";
 import type {Schema} from "../amplify/data/resource";
 import {generateClient} from "aws-amplify/data";
 
+type FeatureFlags = { [key: string]: boolean };
+
 const client = generateClient<Schema>();
 
 function App() {
@@ -17,18 +19,20 @@ function App() {
     client.models.EnabledFeatures.observeQuery().subscribe({
       next: (data) => setFeatures([...data.items]),
     })
+
+    client.queries.getFeatureFlags().then(value => {
+      const buildTimeFeatureFlags: string[] = JSON.parse(value.data || '[]');
+      console.log('buildTime FFs:', buildTimeFeatureFlags)
+    })
   }, []);
 
   useEffect(() => {
     const featuresDef = JSON.parse(features[0]?.features as string || '[]');
     if (Array.isArray(featuresDef)) {
       setFeaturesList([...featuresDef]);
+      console.log("features update received:", featuresDef);
     }
   }, [features]);
-
-  client.queries.sayHello({name: 'bro'}).then(value => {
-    console.log(value)
-  })
 
   function createTodo() {
     client.models.Todo.create({content: window.prompt("Todo content")});
@@ -37,10 +41,6 @@ function App() {
   function deleteTodo(id: string) {
     client.models.Todo.delete({id})
   }
-
-  // function createSampleFeature() {
-  //   client.models.EnabledFeatures.create({features: '["asdfa", "asdfadff"]'});
-  // }
 
   return (
     <main>
@@ -55,21 +55,6 @@ function App() {
           </li>
         ))}
       </ul>
-      {/*<div>*/}
-      {/*  🥳 App successfully hosted. Try creating a new todo.*/}
-      {/*  <br/>*/}
-      {/*  <a href="https://docs.amplify.aws/react/start/quickstart/#make-frontend-updates">*/}
-      {/*    Review next step of this tutorial.*/}
-      {/*  </a>*/}
-      {/*</div>*/}
-
-      <div>
-        <h3>My features</h3>
-        {/*<button onClick={createSampleFeature}>Create default features</button>*/}
-        {featuresList.map((feature) => (
-          <div>{feature}</div>
-        ))}
-      </div>
     </main>
   );
 }
