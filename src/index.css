@@ -64,3 +64,13 @@ a {
   font-weight: 800;
   text-decoration: none;
 }
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.header img {
+  margin-right: 10px;
+}

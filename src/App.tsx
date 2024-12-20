@@ -9,7 +9,7 @@ const client = generateClient<Schema>();
 function App() {
   const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
   const [features, setFeatures] = useState<Array<Schema["EnabledFeatures"]["type"]>>([]);
-  const [featuresList, setFeaturesList] = useState<Array<string>>([]);
+  const [, setFeaturesList] = useState<Array<string>>([]);
 
   useEffect(() => {
     client.models.Todo.observeQuery().subscribe({
@@ -44,7 +44,7 @@ function App() {
 
   return (
     <main>
-      <div>
+      <div className="header">
         <img src="./public/fwIcon.svg" width="50" height="50"/>
         <h1>fieldwire 2.0</h1>
       </div>
