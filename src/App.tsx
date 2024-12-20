@@ -45,7 +45,7 @@ function App() {
   return (
     <main>
       <div className="header">
-        <img src="./public/fwIcon.svg" width="50" height="50"/>
+        <img src="/fwIcon.svg" width="50" height="50" alt={'fwLogo'}/>
         <h1>fieldwire 2.0</h1>
       </div>
       <h2>My todos</h2>
