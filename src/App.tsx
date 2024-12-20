@@ -44,7 +44,11 @@ function App() {
 
   return (
     <main>
-      <h1>My todos</h1>
+      <div>
+        <img src="./public/fwIcon.svg" width="50" height="50"/>
+        <h1>fieldwire 2.0</h1>
+      </div>
+      <h2>My todos</h2>
       <button onClick={createTodo}>+ new</button>
       <ul>
         {todos.map((todo) => (
