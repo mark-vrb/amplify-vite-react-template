@@ -80,8 +80,8 @@ function App() {
   return (
     <main>
       <div className="header">
-        <img src="/fwIcon.svg" width="50" height="50" alt={'fwLogo'}/>
-        { hackwireLogo ?
+        <img src={hackwireLogo ? '/hackwire.png' : '/fwIcon.svg'} width="70" height="70" alt={'fwLogo'}/>
+        {hackwireLogo ?
           <h1><s>Fieldwire</s> Hackwire</h1> :
           <h1>Fieldwire</h1>
         }
