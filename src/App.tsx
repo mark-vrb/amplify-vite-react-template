@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import type {Schema} from "../amplify/data/resource";
 import {generateClient} from "aws-amplify/data";
 
-type FeatureFlags = { [key: string]: boolean };
+// type FeatureFlags = { [key: string]: boolean };
 
 const client = generateClient<Schema>();
 
@@ -30,7 +30,7 @@ function App() {
     const featuresDef = JSON.parse(features[0]?.features as string || '[]');
     if (Array.isArray(featuresDef)) {
       setFeaturesList([...featuresDef]);
-      console.log("features update received:", featuresDef);
+      console.log("features update received:", featuresList);
     }
   }, [features]);
 
