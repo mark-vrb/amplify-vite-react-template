@@ -15,6 +15,7 @@ function App() {
 
   const [featuresList, setFeaturesList] = useState<string>();
   const [hackwireLogo, setHackwireLogo] = useState<boolean>(false);
+  // const [initialized, setInitialized] = useState<boolean>(false);
 
   const dialog = document.querySelector("dialog");
 
@@ -44,20 +45,23 @@ function App() {
 
     const buildTime = JSON.parse(buildTimeFeatures) as string[];
     const live = JSON.parse(liveFeatures) as string[];
-
     const set = new Set([...buildTime, ...live]);
-    if (set.has('hackwireLogo')) {
-      setHackwireLogo(true);
-    } else {
-      setHackwireLogo(false);
-    }
+
     setFeaturesList(JSON.stringify(Array.from(set)));
   }, [buildTimeFeatures, liveFeatures]);
 
   useEffect(() => {
     if (!featuresList) return;
+
+    const set = new Set(JSON.parse(featuresList) as string[] );
+    if (set.has('hackwireLogo')) {
+      setHackwireLogo(true);
+    } else {
+      setHackwireLogo(false);
+    }
+
     console.log("features update received:", featuresList);
-    dialog?.showModal();
+    // dialog?.showModal();
   }, [dialog, featuresList]);
 
   function createTodo() {
